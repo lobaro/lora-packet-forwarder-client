@@ -1,2 +1,4 @@
-# lora-packet-forwarder-client
-Go Client application for the [LoRa Net Packet-Forwarder](https://github.com/Lora-net/packet_forwarder)
+# LoRa Packet Forwarder Client
+
+Enables communication with the [LoRa Packet Forarder](https://github.com/Lora-net/packet_forwarder) from Semtech.
+
