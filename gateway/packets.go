@@ -2,14 +2,13 @@ package gateway
 
 import (
 	"time"
+
 	"github.com/Lobaro/lora-packet-forwarder-client/gateway/band"
 )
 
-
-
 // RXPacket contains the PHYPayload received from the gateway.
 type RXPacket struct {
-	RXInfo     RXInfo  `json:"rxInfo"`
+	RXInfo     RXInfo `json:"rxInfo"`
 	PHYPayload []byte `json:"phyPayload"`
 }
 
@@ -39,8 +38,8 @@ type RXInfo struct {
 // TXPacket contains the PHYPayload which should be send to the
 // gateway.
 type TXPacket struct {
-	TXInfo     TXInfo             `json:"txInfo"`
-	PHYPayload []byte             `json:"phyPayload"`
+	TXInfo     TXInfo `json:"txInfo"`
+	PHYPayload []byte `json:"phyPayload"`
 }
 
 // TXPacketBytes contains the PHYPayload as []byte which should be send to the
@@ -52,7 +51,7 @@ type TXPacketBytes struct {
 
 // TXInfo contains the information used for TX.
 type TXInfo struct {
-	MAC         Mac `json:"mac"`                   // MAC address of the gateway
+	MAC         Mac           `json:"mac"`         // MAC address of the gateway
 	Immediately bool          `json:"immediately"` // send the packet immediately (ignore Time)
 	Timestamp   uint32        `json:"timestamp"`   // gateway internal receive timestamp with microsecond precision, will rollover every ~ 72 minutes
 	Frequency   int           `json:"frequency"`   // frequency in Hz
@@ -74,4 +73,3 @@ type GatewayStatsPacket struct {
 	TXPacketsEmitted    int                    `json:"txPacketsEmitted"`
 	CustomData          map[string]interface{} `json:"customData"` // custom fields defined by alternative packet_forwarder versions (e.g. TTN sends platform, contactEmail, and description)
 }
-

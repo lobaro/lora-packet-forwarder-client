@@ -6,8 +6,8 @@ import (
 	"testing"
 	"time"
 
-	. "github.com/smartystreets/goconvey/convey"
 	"github.com/Lobaro/lora-packet-forwarder-client/gateway/band"
+	. "github.com/smartystreets/goconvey/convey"
 )
 
 func TestBackend(t *testing.T) {

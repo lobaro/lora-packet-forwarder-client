@@ -10,7 +10,6 @@ import (
 // Name defines the band-name type.
 type Name string
 
-
 // Modulation defines the modulation type.
 type Modulation string
 
@@ -123,7 +122,6 @@ func (b *Band) GetRX1Frequency(txFrequency int) (int, error) {
 	return b.getRX1FrequencyFunc(b, txFrequency)
 }
 
-
 // GetDataRate returns the index of the given DataRate.
 func (b *Band) GetDataRate(dr DataRate) (int, error) {
 	for i, d := range b.DataRates {
@@ -145,4 +143,3 @@ func (b *Band) GetRX1DataRateForOffset(dr, drOffset int) (int, error) {
 	}
 	return b.RX1DataRate[dr][drOffset], nil
 }
-

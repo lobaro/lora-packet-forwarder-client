@@ -10,8 +10,8 @@ import (
 	"sync"
 	"time"
 
-	log "github.com/Sirupsen/logrus"
 	"github.com/Lobaro/lora-packet-forwarder-client/gateway/band"
+	log "github.com/Sirupsen/logrus"
 )
 
 var errGatewayDoesNotExist = errors.New("gateway does not exist")
@@ -77,7 +77,7 @@ func (c *gateways) cleanup() error {
 
 // Client implements a Semtech gateway client/backend.
 type Client struct {
-	CheckCrc    bool
+	CheckCrc bool
 
 	log         *log.Logger
 	conn        *net.UDPConn

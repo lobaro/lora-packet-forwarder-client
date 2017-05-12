@@ -1,14 +1,13 @@
 package gateway
 
 import (
-	"fmt"
 	"encoding/hex"
 	"errors"
+	"fmt"
 )
 
 // 64 bit MacAddress of Gateway
 type Mac [8]byte
-
 
 // MarshalText implements encoding.TextMarshaler.
 func (m Mac) MarshalText() ([]byte, error) {
