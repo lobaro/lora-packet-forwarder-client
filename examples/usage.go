@@ -23,7 +23,7 @@ func main() {
 
 	go handleRxPackets(client)
 
-	log.Info("Listening on poer :1680. Press Ctrl + c to exit.")
+	log.Info("Listening on port :1680. Press Ctrl + c to exit.")
 
 	// Block till Exit() is called or program terminates
 	<-exit
@@ -69,4 +69,28 @@ func SendDownlinkExample(client *gateway.Client) {
 		PHYPayload: []byte{1, 2, 3, 4},
 	}
 	client.Send(txPacket)
+}
+
+func example() {
+	client, err := gateway.NewClient(
+		":1680",
+		func(gwMac gateway.Mac) error {
+			return nil
+		},
+		func(gwMac gateway.Mac) error {
+			return nil
+		},
+	)
+
+	if err != nil {
+		panic(err)
+	}
+
+	defer client.Close()
+
+	log.Info("Waiting for gateway packet ...")
+	msg := <-client.RXPacketChan()
+	log.Infof("Received packet from Gateway with phy payload %v", msg.PHYPayload)
+
+	log.Info("Exit")
 }

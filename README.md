@@ -8,48 +8,33 @@ The code is based on the [LoRa Gateway Bridge](https://github.com/brocaar/lora-g
 # Usage
 
 ```
-func main() {
-	client, err := gateway.NewClient(":1680", onNewGateway, onDeleteGateway)
+client, err := gateway.NewClient(
+	":1680",
+	func(gwMac gateway.Mac) error {
+		return nil
+	},
+	func(gwMac gateway.Mac) error {
+		return nil
+	},
+)
 
-	if err != nil {
-		panic(err)
-	}
-
-	defer client.Close()
-
-	go handleRxPackets(client)
-
-	log.Info("Listening on poer :1680. Press Ctrl + c to exit.")
-
-	// Block till program terminates
-	exit = make(chan struct{})
-	<-exit
+if err != nil {
+	panic(err)
 }
 
-func onNewGateway(gwMac gateway.Mac) error {
-	// New gateway with given mac address
-	return nil
-}
+defer client.Close()
 
-func onDeleteGateway(gwMac gateway.Mac) error {
-	// Removed gateway with given mac address
-	return nil
-}
+log.Info("Waiting for gateway packet ...")
+msg := <-client.RXPacketChan()
+log.Infof("Received packet from Gateway with phy payload %v", msg.PHYPayload)
 
-func handleRxPackets(client *gateway.Client) {
-	for {
-		select {
-		case msg := <-client.RXPacketChan():
-			log.Infof("Received packet from Gateway with phy payload %v", msg.PHYPayload)
-		}
-	}
-
-}
-
+log.Info("Exit")
 ```
 
 Make sure you have a [LoRa Packet Forarder](https://github.com/Lora-net/packet_forwarder) configured
-to communicate with the client endpoint. You can find example configs and code in `/examples`.
+to communicate with the client endpoint. You can find example configs and code in `/examples`:
+[usage.go](https://github.com/Lobaro/lora-packet-forwarder-client/blob/master/examples/usage.go) and
+[local_conf.json](https://github.com/Lobaro/lora-packet-forwarder-client/blob/master/examples/local_conf.json)
 
 ## License
 
